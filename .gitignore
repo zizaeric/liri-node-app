@@ -1,3 +1,7 @@
+#n Node modules and .DS_Store
+node_modules
+.DS_Store
+
 # Logs
 logs
 *.log
