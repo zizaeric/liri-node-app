@@ -14,6 +14,8 @@ var liriCommand = process.argv[2];
 // Access Spotify access credentials in the keys.js file
 var spotify = new Spotify (keys.spotify);
 
+// Import the moment npm package
+var moment = require("moment");
 //---------------Commands that LIRI understands---------------------
 
 if (liriCommand === "concert-this") { concertThis(); }
@@ -22,13 +24,43 @@ else if (liriCommand === "movie-this") { movieThis(); }
 else if (liriCommand === "do-what-it-says") { doWhatItSays(); }
 else {
     console.log("Please try one of these commands");
-    console.log("1. node liri.js spotify-this-song 'song name here'");
+    console.log("1. node liri.js concert-this 'artist/band name here'");
+    console.log("2. node liri.js spotify-this-song 'song name here'");
     console.log("Song names longer than one word must be in quotation marks");
 };
 
 //---------------------------Functions----------------------------
 
+//-------------------concertThis Function ------------------------
+// uses axios npm package to call the Bands in Town Artist Events API
+// uses moment npm package to format date
+function concertThis(artist) {
+    var artist = process.argv[3];
+    var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+
+    axios.get(queryURL).then(
+        function(response) {
+            // console.log(response);
+            // console.log(response.data);
+            if (!response.data.length) {
+                console.log("No results found for " + artist);
+                return;
+            }
+            console.log("Upcoming concerts for " + artist + ":");
+            for (var i = 0; i < response.data.length; i++) {
+                var event = response.data[i];
+                console.log(i + " - " +
+                    event.venue.city + ", " + (event.venue.region || event.venue.country) + " at " + event.venue.name + ", " +
+                    moment(event.datetime).format("MM/DD/YYYY")
+                );
+            }
+        }
+    );
+};
+
+
 //-----------------spotifyThisSong Function ----------------------
+// Use Spotify module to call the node-spotify-api
 function spotifyThisSong(songName) {
     var songName = process.argv[3];
     if (!songName) {
@@ -40,6 +72,7 @@ function spotifyThisSong(songName) {
             var songInfo = data.tracks.items;
             for (var i = 0; i < 5; i++) {
                 if (songInfo[i] != undefined) {
+                    // Store these console logs into one variable and write that variable in the log file
                     console.log("Artist: " + songInfo[i].artists[0].name);
                     console.log("Song: " + songInfo[i].name);
                     console.log("Preview Url: " + songInfo[i].preview_url);
@@ -47,7 +80,9 @@ function spotifyThisSong(songName) {
                     console.log("------------------" + i + "------------------");
                 }
             }
+        } else {
+            console.log("Error: " + err);
+            return;
         }
-
     });
 };
