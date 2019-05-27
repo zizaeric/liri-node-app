@@ -200,7 +200,7 @@ function doWhatItSays() {
            var doThisLiri = data.split(", ");
         //    console.log(doThisLiri[0]);
         //    console.log(doThisLiri[1]);
-        
+
            spotifyThisSong(doThisLiri[0], doThisLiri[1]);
         } else {
             console.log("Error occurred" + error);
