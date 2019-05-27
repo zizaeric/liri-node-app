@@ -26,18 +26,22 @@ else {
     console.log("Please try one of these commands");
     console.log("1. node liri.js concert-this 'artist/band name here'");
     console.log("2. node liri.js spotify-this-song 'song name here'");
+    console.log("3. node liri.js movie-this 'movie name here'");
     console.log("Song names longer than one word must be in quotation marks");
 };
 
 //---------------------------Functions----------------------------
 
-//-------------------concertThis Function ------------------------
+//------------------ concertThis Function ------------------------
 // uses axios npm package to call the Bands in Town Artist Events API
-// uses moment npm package to format date
+// uses moment npm package to format date as MM/DD/YYYY
 function concertThis(artist) {
     var artist = process.argv[3];
     var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
-
+    if (!artist) {
+        console.log("Please give me a band or artist to search for.");
+        return;
+    }
     axios.get(queryURL).then(
         function(response) {
             // console.log(response);
@@ -58,9 +62,8 @@ function concertThis(artist) {
     );
 };
 
-
-//-----------------spotifyThisSong Function ----------------------
-// Use Spotify module to call the node-spotify-api
+//---------------- spotifyThisSong Function ----------------------
+// Uses Spotify module to call the node-spotify-api
 function spotifyThisSong(songName) {
     var songName = process.argv[3];
     if (!songName) {
@@ -86,3 +89,46 @@ function spotifyThisSong(songName) {
         }
     });
 };
+
+//------------------- movieThis Function --------------------------
+// Uses axios npm package to retrieve movie info from the OMDB API
+function movieThis(movie) {
+    var movie = process.argv[3];
+    if (!movie) {
+        movie = "mr nobody";
+    }
+    var urlMovie = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=full&tomatoes=true&apikey=trilogy";
+    axios.get(urlMovie).then(
+        function (response) {
+            // console.log(response);
+            // console.log(response.data);
+            // Next step: Assign the movie info below to a single variable and write that variable in the log.txt file
+            console.log("----------" + movie + "----------");
+            console.log("Title: " + response.data.Title);
+            console.log("Year: " + response.data.Year);
+            console.log("Rated: " + response.data.Rated);
+            console.log("Imbd Rating: " + response.data.ImbdRating);
+            console.log("Country: " + response.data.Country);
+            console.log("Language: " + response.data.Language);
+            console.log("Plot: " + response.data.Plot);
+            console.log("Actors: " + response.data.Actors);
+            console.log("Rotten Tomatoes Rating: " + response.data.tomatoRating);
+        }).catch(function(error) {
+            console.log("Error: " + error);
+            return;
+        });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
