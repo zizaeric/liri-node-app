@@ -34,7 +34,7 @@ else {
     console.log("2. node liri.js spotify-this-song 'song name here'");
     console.log("3. node liri.js movie-this 'movie name here'");
     console.log("4. node liri.js do-what-it-says");
-    console.log("Song names longer than one word must be in quotation marks");
+    console.log("Names, songs, movies longer than one word must be in quotation marks");
 };
 
 //---------------------------Functions----------------------------
