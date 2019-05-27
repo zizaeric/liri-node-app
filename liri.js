@@ -27,6 +27,7 @@ else {
     console.log("1. node liri.js concert-this 'artist/band name here'");
     console.log("2. node liri.js spotify-this-song 'song name here'");
     console.log("3. node liri.js movie-this 'movie name here'");
+    console.log("4. node liri.js do-what-it-says");
     console.log("Song names longer than one word must be in quotation marks");
 };
 
@@ -119,9 +120,21 @@ function movieThis(movie) {
         });
 };
 
-
-
-
+//------------------ doWhatItSays Function ------------------------
+// Uses the fs module to access and read the comments of the random.txt file and do what's written in it
+function doWhatItSays() {
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if(!error) {
+            // console.log(data);
+           var doThisLiri = data.split(", ");
+        //    console.log(doThisLiri[0]);
+        //    console.log(doThisLiri[1]);
+           spotifyThisSong(doThisLiri[0], doThisLiri[1]);
+        } else {
+            console.log("Error occurred" + error);
+        }
+    });
+};
 
 
 
