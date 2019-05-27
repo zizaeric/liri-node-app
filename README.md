@@ -74,10 +74,8 @@ See screenshot below.
 ----------------------------|--------------------------------------
     1. artist/band name     | "Please try one of these commands: "
     (concert-this)          | followed by the list of commands above.
-                            |
     2. song name            | Returns results for "The Sign"
     (spotifyThisSong)       |
-                            |
     3. movie name           | Returns results for "Mr. Nobody"
     (movieThis)             |
                             
