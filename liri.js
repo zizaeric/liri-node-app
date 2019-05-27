@@ -29,7 +29,7 @@ if (liriCommand === "concert-this") {
     doWhatItSays(); 
 }
 else {
-    console.log("Please try one of these commands");
+    console.log("Please try one of these commands: ");
     console.log("1. node liri.js concert-this 'artist/band name here'");
     console.log("2. node liri.js spotify-this-song 'song name here'");
     console.log("3. node liri.js movie-this 'movie name here'");
