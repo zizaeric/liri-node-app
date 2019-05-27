@@ -70,14 +70,12 @@ See screenshot below.
 ![Commands LIRI Understands](./screenshots_liri/liri-node-app_commands.png?raw=true);
 
 ### B. Missing process.argv[3]
-        missing             |       LIRI's default response
-----------------------------|--------------------------------------
-    1. artist/band name     | "Please try one of these commands: "
-    (concert-this)          | followed by the list of commands above.
-    2. song name            | Returns results for "The Sign"
-    (spotifyThisSong)       |
-    3. movie name           | Returns results for "Mr. Nobody"
-    (movieThis)             |
+        missing                         |       LIRI's default response
+----------------------------------------|--------------------------------------
+1. artist/band name (concert-this)      | "Please try one of these commands: "
+                                        | followed by the list of commands above.
+2. song name (spotifyThisSong)          | Returns results for "The Sign"
+3. movie name (movieThis)               | Returns results for "Mr. Nobody"
                             
 ## Bonus
 **log.txt**
